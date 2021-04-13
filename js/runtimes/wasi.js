@@ -1,7 +1,7 @@
 const fs = require("fs");
 const { WASI } = require("wasi");
 
-async function runWasi(wasm){
+async function runWasi(wasm) {
   const wasi = new WASI({
     args: ["/sandbox/Book.pdf"],
     preopens: {
@@ -9,16 +9,16 @@ async function runWasi(wasm){
     },
   });
   const importObject = { wasi_snapshot_preview1: wasi.wasiImport };
-
   const instance = await WebAssembly.instantiate(wasm, importObject);
-  console.log(instance.exports);
   wasi.start(instance);
 }
 
-/*
-(async () => {
+
+async function main() {
   const wasm = await WebAssembly.compile(
-    fs.readFileSync("./wasm/opensubtitle-wasm.wasm"),
+    fs.readFileSync("./wasm/opensubtitle-wasi.wasm"),
   );
   await runWasi(wasm);
-})();*/
+};
+
+main();

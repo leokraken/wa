@@ -27,7 +27,6 @@ const startWasiTask = async pathToWasmFile => {
   let instance = await WebAssembly.instantiate(wasmModule, {
     ...wasi.getImports(wasmModule),
   });
-  instance.exports.hello_world();
   // Start the WASI instance
   wasi.start(instance);
 };
