@@ -16,3 +16,9 @@ cargo install wasm-bindgen-cli
 # Build NodeJS dependency
 wasm-bindgen target/wasm32-unknown-unknown/release/opensubtitle-wasm.wasm --nodejs  --out-dir ./pkg
 
+
+
+
+## Links
+* https://wasmbyexample.dev/examples/wasi-hello-world/wasi-hello-world.rust.en-us.html
+* https://dev.to/jor/rust-wasm-browser-nodejs-2bo6

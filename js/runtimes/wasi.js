@@ -18,7 +18,11 @@ async function main() {
   const wasm = await WebAssembly.compile(
     fs.readFileSync("./wasm/opensubtitle-wasi.wasm"),
   );
-  await runWasi(wasm);
+  for(i=0; i<100; i++){
+    console.time("wasi")
+    await runWasi(wasm);
+    console.timeEnd("wasi")
+  }
 };
 
 main();
