@@ -8,15 +8,20 @@ cargo build --target wasm32-unknown-unknown
 
 
 ## Install dependencies
-Install wasm-bindgen-cli in order to generate NodeJS bindings. 
+Install wasm-bindgen-cli or wasm-pack in order to generate NodeJS bindings. 
 ```
 cargo install wasm-bindgen-cli
 ```
+```
+cargo install wasm-pack
 
+```
 # Build NodeJS dependency
 wasm-bindgen target/wasm32-unknown-unknown/release/opensubtitle-wasm.wasm --nodejs  --out-dir ./pkg
 
-
+```
+wasm-pack build --target nodejs
+```
 
 
 ## Links
