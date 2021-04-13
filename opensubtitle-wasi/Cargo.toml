@@ -1,13 +1,9 @@
 [package]
-name = "opensubtitle-wasm"
+name = "opensubtitle-wasi"
 version = "0.1.0"
-authors = ["leokraken <joleocl@gmail.com>"]
+authors = ["granbestiapop <leonardo.clavijo@mercadolibre.com>"]
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-wasm-bindgen = "0.2.73"
-
-[lib]
-crate-type = ["cdylib"]

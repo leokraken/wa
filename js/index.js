@@ -3,17 +3,17 @@ const fs = require("fs");
 const { WASI } = require("@wasmer/wasi");
 let nodeBindings = require("@wasmer/wasi/lib/bindings/node");
 
-const wasmFilePath = "./opensubtitle-wasm.wasm";
+const wasmFilePath = "./wasm/opensubtitle-wasm.wasm";
 
 nodeBindings = nodeBindings.default || nodeBindings;
 
 // Instantiate a new WASI Instance
 let wasi = new WASI({
-  args: [wasmFilePath],
+  args: ["/sandbox/Book.pdf"],
   env: {},
   bindings: nodeBindings,
   preopens: {
-    '/sandbox': '/home/granbestiapop/Downloads/Lie to Me Season 2'
+    '/sandbox': process.cwd(),
   }
 });
 
@@ -26,13 +26,8 @@ const startWasiTask = async pathToWasmFile => {
   let wasmModule = await WebAssembly.compile(wasmBytes);
   let instance = await WebAssembly.instantiate(wasmModule, {
     ...wasi.getImports(wasmModule),
-    //wasi_unstable: () => {},
   });
-  console.log(instance.exports)
-  const result = instance.exports.hello_world();
-  console.log(result)
-  const result2 = instance.exports.get_hello();
-  console.log(result2)
+  instance.exports.hello_world();
   // Start the WASI instance
   wasi.start(instance);
 };

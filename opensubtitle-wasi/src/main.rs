@@ -3,22 +3,10 @@ use std::fs;
 use std::fs::File;
 use std::io::{BufReader, Read, Seek, SeekFrom};
 use std::mem;
-//use wasm_bindgen::prelude::*;
-use std::ffi::CString;
-use std::os::raw::c_char;
 use std::time::{Instant};
 
 const HASH_BLK_SIZE: u64 = 65536;
 
-//#[wasm_bindgen]
-pub fn hello_world() -> String {
-    "hello_world".to_string()
-}
-
-pub fn get_hello() -> *mut c_char {
-    let s = CString::new("hello").unwrap();
-    s.into_raw()
-}
 
 fn create_hash(file: File, fsize: u64) -> Result<String, std::io::Error> {
     let mut buf = [0u8; 8];
