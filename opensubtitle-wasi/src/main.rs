@@ -41,7 +41,7 @@ fn create_hash(file: File, fsize: u64) -> Result<String, std::io::Error> {
     Ok(hash_string)
 }
 
-pub fn main() {
+fn main() {
     let args: Vec<String> = env::args().collect();
     println!("{:?}", args);
     let fname = args[0].as_str();
