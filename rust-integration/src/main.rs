@@ -3,12 +3,8 @@ use wasmtime_wasi::{sync::WasiCtxBuilder, Wasi};
 use wasmtime_wasi::sync::Dir;
 use std::path::{Path};
 use std::fs::File;
-//use cap_std::fs::Dir;
-
 
 fn main() {
-
-
     // Define the WASI functions globally on the `Config`.
     let mut config = Config::default();
     Wasi::add_to_config(&mut config);
@@ -19,8 +15,8 @@ fn main() {
     // `WasiCtxBuilder` provides a number of ways to configure what the target program
     // will have access to.
     let path = Path::new("/Users/lclavijo/node/wa/js");
-    let mut file = match File::open(&path) {
-        Err(why) => panic!("couldn't open file!"),
+    let file = match File::open(&path) {
+        Err(_err) => panic!("couldn't open file!"),
         Ok(file) => {println!("could open !"); file},
      }; 
 

@@ -10,3 +10,7 @@ edition = "2018"
 wasmtime = "0.26.0"
 wasmtime-wasi = "0.26.0"
 cap-std = "0.13.9"
+
+[[example]]
+name = "socket"
+path = "src/socket.rs"
