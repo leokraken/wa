@@ -1,10 +1,24 @@
-const { hello_world } = require('../../opensubtitle-wasm/pkg/opensubtitle_wasm');
-const res = hello_world();
-console.log(res);
+const { hello_world, http_client } = require('../../opensubtitle-wasm/pkg/opensubtitle_wasm');
 
-
-for (i = 0; i < 100; i++) {
-  console.time("test")
-  const res = hello_world();
-  console.timeEnd("test");
+function helloWorld() {
+  const res = hello_world("hola");
+  console.log(res);
 }
+
+async function client(){
+  const result = await http_client();
+  console.log(result);
+  return result;
+}
+
+
+function helloWorldIterations() {
+  for (i = 0; i < 100; i++) {
+    console.time("test")
+    const res = hello_world();
+    console.timeEnd("test");
+  }
+}
+
+
+helloWorld();

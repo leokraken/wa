@@ -5,6 +5,6 @@ use wasm_bindgen::prelude::*;
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[wasm_bindgen]
-pub fn hello_world() -> String {
-    "hello_world".to_string()
+pub fn hello_world(name: String) -> String {
+    format!("hello world {}", name)
 }
