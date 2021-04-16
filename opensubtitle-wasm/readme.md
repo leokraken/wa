@@ -26,3 +26,4 @@ wasm-pack build --target nodejs
 ## Links
 * https://wasmbyexample.dev/examples/wasi-hello-world/wasi-hello-world.rust.en-us.html
 * https://dev.to/jor/rust-wasm-browser-nodejs-2bo6
+* JS Value https://docs.rs/wasm-bindgen/0.2.73/wasm_bindgen/struct.JsValue.html

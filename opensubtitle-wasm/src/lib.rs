@@ -24,7 +24,22 @@ struct MyStruct {
 }
 
 #[wasm_bindgen]
-pub fn run_js_value_struct(value: JsValue) -> String {
-    let typed: MyStruct= value.into_serde().expect("should be a string");
-    format!("hello world {} {}", typed.text, typed.number)
+pub fn run_js_value_struct(value: JsValue) -> Result<String, JsValue> {
+    let typed: MyStruct= match value.into_serde(){
+        Ok(res) => res,
+        Err(_) => {return Err(JsValue::from("Error on deserialize object"));}
+    };
+    Ok(format!("hello world {} {}", typed.text, typed.number))
+}
+
+#[wasm_bindgen]
+pub fn run_jsvalue_on_return() -> Result<JsValue, JsValue> {
+    let typed = MyStruct {
+        text: "text".to_string(),
+        number: 1,
+    };
+    match JsValue::from_serde(&typed){
+        Err(_) => Err(JsValue::from("Error create type")),
+        Ok(res) => Ok(res),
+    }
 }

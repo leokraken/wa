@@ -1,22 +1,42 @@
-const { hello_world, run_js_value_string, run_js_value_struct } = require('../../opensubtitle-wasm/pkg/opensubtitle_wasm');
+const assert = require('assert');
+const {
+  hello_world,
+  run_js_value_string,
+  run_js_value_struct,
+  run_jsvalue_on_return
+} = require('../../opensubtitle-wasm/pkg/opensubtitle_wasm');
 
 function helloWorld() {
-  const res = hello_world("hola");
-  console.log(res);
+  const result = hello_world("hola");
+  assert.strictEqual("hello world hola", result);
+  console.log(result);
 }
-
 
 function runJSValueString() {
-  const res = run_js_value_string("some string");
-  console.log(res);
+  const result = run_js_value_string("some string");
+  assert.strictEqual("hello world some string", result);
+  console.log(result);
 }
 
-function runJSValueStruct() {
-  const data = {text:"awesome", number: 1};
-  const res = run_js_value_struct(data);
-  console.log(res);
+function runJSValueStruct(data) {
+  try {
+    const result = run_js_value_struct(data);
+    assert.strictEqual("hello world awesome 1", result);
+    console.log(result);
+  } catch (err) {
+    console.error("Error!", err);
+  }
 }
 
+function runJSValueAsReturn() {
+  try {
+    const result = run_jsvalue_on_return();
+    assert.deepStrictEqual({ text: 'text', number: 1 }, result);
+    console.log(result);
+  } catch (err) {
+    console.error("Error happens :'(", err);
+  }
+}
 
 function helloWorldIterations() {
   for (i = 0; i < 100; i++) {
@@ -26,9 +46,18 @@ function helloWorldIterations() {
   }
 }
 
-
+// Hello world with name
 helloWorld();
 
+// Any value serialized to string
 runJSValueString();
 
-runJSValueStruct();
+// Working with rust struct serialization json
+const dataOk = { text: "awesome", number: 1 };
+const dataErr = "";
+
+runJSValueStruct(dataOk);
+runJSValueStruct(dataErr);
+
+
+runJSValueAsReturn();
