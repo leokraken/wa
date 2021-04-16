@@ -1,14 +1,20 @@
-const { hello_world, http_client } = require('../../opensubtitle-wasm/pkg/opensubtitle_wasm');
+const { hello_world, run_js_value_string, run_js_value_struct } = require('../../opensubtitle-wasm/pkg/opensubtitle_wasm');
 
 function helloWorld() {
   const res = hello_world("hola");
   console.log(res);
 }
 
-async function client(){
-  const result = await http_client();
-  console.log(result);
-  return result;
+
+function runJSValueString() {
+  const res = run_js_value_string("some string");
+  console.log(res);
+}
+
+function runJSValueStruct() {
+  const data = {text:"awesome", number: 1};
+  const res = run_js_value_struct(data);
+  console.log(res);
 }
 
 
@@ -22,3 +28,7 @@ function helloWorldIterations() {
 
 
 helloWorld();
+
+runJSValueString();
+
+runJSValueStruct();
